@@ -1,0 +1,44 @@
+version: '3'
+services:
+  admin_db:
+    container_name: admin_db
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=admin
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_PASSWORD=admin
+    volumes:
+        - ./mysql:/var/lib/mysql
+    ports:
+      - 3307:3306
+    networks:
+      - admin_backend
+  admin_php:
+    container_name: admin_php
+    build:
+      context: ./php-fpm
+    volumes:
+      - ../:/var/www/html
+    links:
+      - admin_db
+    networks:
+      - admin_backend
+
+  admin_web:
+    image: nginx:latest
+    container_name:  admin_web
+    ports:
+      - "8081:80"
+    networks:
+        - admin_frontend
+    volumes:
+        - ../:/var/www/html
+        - ./nginx/conf:/etc/nginx/conf.d
+        - ./nginx/logs:/var/log/nginx/
+    links:
+      - admin_php
+    networks:
+      - admin_backend
+networks:
+  admin_backend:      
