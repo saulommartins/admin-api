@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Auth::routes(['verify' => true]);
 
 Route::post('login', 'ApiController@login');
 Route::post('register', 'ApiController@register');
