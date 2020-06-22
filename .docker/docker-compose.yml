@@ -19,7 +19,7 @@ services:
     build:
       context: ./php-fpm
     volumes:
-      - ../:/var/www/html
+      - ../api/:/var/www/html
     links:
       - admin_db
     networks:
@@ -33,7 +33,7 @@ services:
     networks:
         - admin_frontend
     volumes:
-        - ../:/var/www/html
+        - ../api:/var/www/html
         - ./nginx/conf:/etc/nginx/conf.d
         - ./nginx/logs:/var/log/nginx/
     links:
