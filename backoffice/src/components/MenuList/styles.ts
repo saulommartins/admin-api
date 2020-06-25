@@ -1,5 +1,25 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { Props } from '.';
+
+const openMenuAnimation = keyframes`
+  0% {
+    width: 71px;
+  }
+
+  100% {
+    width: 240px;
+  }
+`;
+
+const closeMenuAnimation = keyframes`
+  0% {
+    width: 240px;
+  }
+
+  100% {
+    width: 71px;
+  }
+`;
 
 export const Container = styled.div<Props>`
   grid-area: ML;
@@ -18,10 +38,17 @@ export const Container = styled.div<Props>`
   ::-webkit-scrollbar {
     display: none;
   }
-  width: ${(props) =>
-    props.menuOpen ? '240px' : 'min-content'};
-  transition: width .2s;
+  width: min-content;
 
+  ${props => props.menuOpen ? 
+    css`
+      width: 240px;
+      animation: ${openMenuAnimation} 2s;
+  ` : 
+    css`
+      animation: ${closeMenuAnimation} 2s;
+      width: 71px;
+  `}
 `;
 
 export const Separator = styled.div`
