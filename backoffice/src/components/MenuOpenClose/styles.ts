@@ -22,7 +22,7 @@ const closeMenuAnimation = keyframes`
 `;
 
 export const Container = styled.div<Props>`
-  grid-area: ML;
+  grid-area: MO;
 
   display: flex;
   flex-direction: column;
@@ -32,7 +32,6 @@ export const Container = styled.div<Props>`
   padding: 11px 11px;
 
 
-  max-height: 100vh;
   overflow-y: scholl;
 
   ::-webkit-scrollbar {
@@ -49,11 +48,4 @@ export const Container = styled.div<Props>`
       animation: ${closeMenuAnimation} .3s;
       width: 71px;
   `}
-`;
-
-export const Separator = styled.div`
-  width: 32px;
-  border-bottom: 2px soline var(--quartenary);
-
-  margin-bottom: 10px;
 `;

@@ -7,13 +7,15 @@ export interface Props {
   isHome?: boolean;
   hasNotifications?: boolean;
   mentions?: number;
+  menuToggle?: any;
 }
 
 const MenuButton: React.FC<Props> = ({
   selected,
   isHome,
   hasNotifications,
-  mentions
+  mentions,
+  menuToggle,
 }) => {
   return (
     <Button
@@ -21,6 +23,7 @@ const MenuButton: React.FC<Props> = ({
       hasNotifications={hasNotifications}
       mentions={mentions}
       className={selected ? 'active' : ''}
+      onClick={menuToggle}
     >
       {isHome && <img src={Logo} alt='Backoffice'/>}
     </Button>

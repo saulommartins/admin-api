@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Menu } from 'styled-icons/material';
 
 export const Container = styled.div`
   grid-area: MI;
@@ -21,15 +22,16 @@ export const MenuTitle = styled.span`
 
 `;
 
-export const MenuDetail = styled.button`
+export const MenuDetail = styled(Menu)`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  cursor: pointer;
 
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 38px;
+  height: 38px;
   margin-bottom: 1px;
   
   background-color: var(--primary);
