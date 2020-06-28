@@ -12,10 +12,10 @@ const Layout: React.FC = () => {
   return (
     <Grid>
       <MenuList
+        menuToggle={() => setMenuOpen(!menuOpen)}
         menuOpen={menuOpen}
       />
       <MenuInfo  
-        menuOpen={() => setMenuOpen(!menuOpen)}
         menuTitle="Menu Selecionado"
       />
       <UserInfo />

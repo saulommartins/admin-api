@@ -1,10 +1,27 @@
 import React from 'react';
-import { Container } from './styles';
- 
+import {
+  Container,
+  Profile,
+  Avatar,
+  UserData,
+  Logout,
+} from './styles';
+
 const UserInfo: React.FC = () => {
+  const userName = 'Saulo'
   return (
     <Container>
-      <span>Dados do usuario logado</span>
+      <Profile>
+        <Avatar />
+        <UserData>
+          <strong>Olá {userName}!!!</strong>
+          <span>#2689</span>
+        </UserData>
+      </Profile>
+
+      <Logout>
+        <strong>Sign out</strong>
+      </Logout>
     </Container>
   );
 };
