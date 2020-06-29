@@ -24,10 +24,8 @@ const SignUp: React.FC<Props> = () => {
   const history = useHistory();
   const { errors, handleSubmit, control } = useForm<SignUpForm>();
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const handleSignUp = (data: ISignUp) => {
-    setLoading(true);
     setMessage("Loading");
 
     AuthService.register(data).then(
@@ -42,7 +40,6 @@ const SignUp: React.FC<Props> = () => {
           error.message ||
           error.toString();
 
-        setLoading(false);
         setMessage(resMessage);
       }
     );

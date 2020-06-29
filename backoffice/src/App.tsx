@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
-import * as R from 'ramda';
 
 import GlobalStyles from './styles/GlobalStyles';
 import Dashboard from './components/Dashboard';
