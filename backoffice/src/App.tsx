@@ -4,7 +4,8 @@ import * as R from 'ramda';
 
 import GlobalStyles from './styles/GlobalStyles';
 import Dashboard from './components/Dashboard';
-import Login from './modules/Login';
+import SignIn from './modules/SignIn';
+import SignUp from './modules/SignUp';
 import authService from './services/auth.service';
 
 const PrivateRoute: React.FC<{
@@ -13,9 +14,7 @@ const PrivateRoute: React.FC<{
   exact: boolean;
 }> = (props) => {
   const user = authService.getCurrentUser();
-  console.log("user", user, R.isNil(user));
   if (user) {
-    console.log("not is nill ");
     return (
       <Route
         path={props.path}
@@ -24,7 +23,6 @@ const PrivateRoute: React.FC<{
       />
     );   
   }
-  console.log("is nill ");
   return (
     <Redirect 
       to="/login"
@@ -38,11 +36,12 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/login" component={SignIn} />
+          <Route exact path="/register" component={SignUp} />
           <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute exact path="/admin" component={Dashboard} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute path='*' exact={true} component={Login} />
+          <PrivateRoute path='*' exact={true} component={SignIn} />
         </Switch>
       </BrowserRouter>
       <GlobalStyles />

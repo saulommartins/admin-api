@@ -1,23 +1,23 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8081/api/";
+const API_URL = "http://192.168.15.2:8081/api/";
 
 interface Login {
-  username: string;
+  email: string;
   password: string
 }
 
 interface Register {
-  username: string;
-  password: string;
+  name: string;
   email: string;
+  password: string;
 }
 
 class AuthService {
-  login({ username, password }: Login) {
+  login({ email, password }: Login) {
     return axios
       .post(API_URL + "signin", {
-        email: username,
+        email,
         password
       })
       .then(response => {
@@ -32,9 +32,9 @@ class AuthService {
     delete sessionStorage.user;
   }
 
-  register({ username, email, password }: Register) {
+  register({ name, email, password }: Register) {
     return axios.post(API_URL + "signup", {
-      username,
+      name,
       email,
       password
     });
@@ -45,6 +45,13 @@ class AuthService {
       return JSON.parse(sessionStorage.user);
     };
     return false;
+  }
+
+  async checkUserName({ username }: { username: string}) {
+    const isAvailable = await axios.post(API_URL + "check", {
+      email: username
+    });
+    return isAvailable?.data?.success;
   }
 }
 

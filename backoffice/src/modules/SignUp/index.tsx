@@ -8,29 +8,31 @@ import { useHistory } from 'react-router-dom';
 export interface Props {
 }
 
-export interface ILogin {
-  username: string;
+export interface ISignUp {
+  name: string;
+  email: string;
   password: string;
 }
 
-type LoginForm = {
-  username: string;
+type SignUpForm = {
+  name: string;
+  email: string;
   password: string;
 };
 
-const Login: React.FC<Props> = () => {
+const SignUp: React.FC<Props> = () => {
   const history = useHistory();
-  const { errors, handleSubmit, control } = useForm<LoginForm>();
+  const { errors, handleSubmit, control } = useForm<SignUpForm>();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = (data: ILogin) => {
+  const handleSignUp = (data: ISignUp) => {
     setLoading(true);
     setMessage("Loading");
 
-    AuthService.login(data).then(
+    AuthService.register(data).then(
       () => {
-        history.push("/dashboard");
+        history.push("/login");
       },
       error => {
         const resMessage =
@@ -47,17 +49,33 @@ const Login: React.FC<Props> = () => {
   };
 
   const validateUserName = async (username: string) => {
-    console.log(`validate user name on api ${username}`);
-    return true;
+    const isAvailable = await AuthService.checkUserName({ username });
+    return isAvailable;
   }
   return (
     <Container>
       <Form
-        onSubmit={handleSubmit(handleLogin)}
+        onSubmit={handleSubmit(handleSignUp)}
       >
         <Controller
-          label="Username"
-          name="username"
+          label="Name"
+          name="name"
+          as={UserName}
+          control={control}
+          rules={{
+            required: true,
+          }}
+          variant="outlined"
+          defaultValue={""}
+        />
+        {errors.name && errors.name.type === "required" && (
+          <p>Name is required</p>
+        )}
+        <p>{errors.name && errors.name.message}</p>
+
+        <Controller
+          label="E-mail"
+          name="email"
           as={UserName}
           control={control}
           rules={{
@@ -65,15 +83,16 @@ const Login: React.FC<Props> = () => {
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
               message: "invalid email address"
-            }
+            },
+            validate: validateUserName,
           }}
           variant="outlined"
           defaultValue={""}
         />
-        {errors.username && errors.username.type === "required" && (
-          <p>Username is required</p>
+        {errors.email && errors.email.type === "required" && (
+          <p>E-mail is required</p>
         )}
-        <p>{errors.username && errors.username.message}</p>
+        <p>{errors.email && errors.email.message}</p>
 
 
         <Controller
@@ -82,17 +101,19 @@ const Login: React.FC<Props> = () => {
           name="password"
           as={Password}
           control={control}
-          rules={{ required: true }}
+          rules={{
+            required: true,
+          }}
           variant="outlined"
           defaultValue={""}
         />
-        {errors.username && errors.username.type === "required" && (
+        {errors.password && errors.password.type === "required" && (
           <p>Password is required</p>
         )}
 
         <div className="form-group">
           <SubmitButton>
-            <span>Login</span>
+            <span>Sign Up</span>
           </SubmitButton>
         </div>
 
@@ -108,4 +129,4 @@ const Login: React.FC<Props> = () => {
   );
 };
 
-export default Login;
+export default SignUp;
