@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Requests\RegistrationFormRequest;
+use App\Http\Requests\CheckFormRequest;
 
 class APIController extends Controller
 {
@@ -89,11 +90,12 @@ class APIController extends Controller
      * @param RegistrationFormRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function teste()
+    public function isAvailable(CheckFormRequest $request)
     {
-        dd("teste");
+        $user = User::where("email", $request->email)->first();
+
         return response()->json([
-            'success'   =>  true,
+            'success'   =>  ($user && $user->id > 0 ? false : true),
         ], 200);
     }
 }
