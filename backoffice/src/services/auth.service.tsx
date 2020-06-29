@@ -24,7 +24,6 @@ class AuthService {
         if (response.data.token) {
           sessionStorage.user =  JSON.stringify(response.data);
         }
-        console.log(response);
         return response.data;
       });
   }
@@ -42,7 +41,6 @@ class AuthService {
   }
 
   getCurrentUser() {
-    console.log("getCurrentUser", sessionStorage.user);
     if (sessionStorage.user) {
       return JSON.parse(sessionStorage.user);
     };
