@@ -11,6 +11,14 @@ export default createGlobalStyle`
     height:100%;
   }
 
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to bottom, var(--primary), var(--discord));
+    height: 100%;
+    margin: 0;
+    color: #555;
+  }
+
   *, button, input {
     border: 0;
     outline: 0;

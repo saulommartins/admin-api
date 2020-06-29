@@ -6,8 +6,11 @@ import {
   UserData,
   Logout,
 } from './styles';
+import authService from '../../services/auth.service';
+import { useHistory } from 'react-router-dom';
 
 const UserInfo: React.FC = () => {
+  const history = useHistory();
   const userName = 'Saulo'
   return (
     <Container>
@@ -19,7 +22,12 @@ const UserInfo: React.FC = () => {
         </UserData>
       </Profile>
 
-      <Logout>
+      <Logout
+        onClick={(e) => { 
+          authService.logout();
+          history.push("/login");
+        }}
+      >
         <strong>Sign out</strong>
       </Logout>
     </Container>
