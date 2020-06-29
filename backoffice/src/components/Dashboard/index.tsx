@@ -6,7 +6,7 @@ import MenuInfo from '../MenuInfo';
 import MainView from  '../MainView';
 import UserInfo from '../UserInfo';
 
-const Layout: React.FC = () => {
+const Dashboard: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   
   return (
@@ -24,4 +24,4 @@ const Layout: React.FC = () => {
   );
 }
 
-export default Layout;
+export default Dashboard;

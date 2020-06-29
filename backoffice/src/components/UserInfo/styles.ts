@@ -40,6 +40,7 @@ export const UserData = styled.div`
 export const Logout = styled.div`
   display: flex;
   height: 100%;
+  cursor: pointer;
   > strong {
     color: var(--gray);
     font-size: 13px;
