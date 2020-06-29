@@ -19,5 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Auth::routes(['verify' => true]);
 
-Route::post('login', 'ApiController@login');
-Route::post('register', 'ApiController@register');
+Route::post('signin', 'ApiController@login');
+Route::post('signup', 'ApiController@register');
+
+Route::group(['middleware' => [ 'auth.jwt', 'verified' ]], function () {
+    Route::get('logout', 'ApiController@logout');
+});
