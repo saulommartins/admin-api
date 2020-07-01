@@ -11,13 +11,16 @@ import { useHistory } from 'react-router-dom';
 
 const UserInfo: React.FC = () => {
   const history = useHistory();
-  const userName = 'Saulo'
+  const getUserInfo = () => {
+    return JSON.parse(sessionStorage.user);
+  }
+  const getUserName = () => getUserInfo()?.user?.name;
   return (
     <Container>
       <Profile>
         <Avatar />
         <UserData>
-          <strong>Olá {userName}!!!</strong>
+          <strong>Olá {getUserName()}!!!</strong>
           <span>#2689</span>
         </UserData>
       </Profile>
