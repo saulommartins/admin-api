@@ -31,10 +31,11 @@ class APIController extends Controller
                 'message' => 'Invalid Email or Password',
             ], 401);
         }
-
+        $user = User::where('email', '=', $input['email'])->first();
         return response()->json([
             'success' => true,
             'token' => $token,
+            'user' => $user,
         ]);
     }
 
