@@ -155,13 +155,14 @@ return [
         'date'      => 'data',
         'day'       => 'dia',
         'excerpt'   => 'resumo',
-        'first_name'=> 'primeiro nome',
+        'first_name' => 'primeiro nome',
         'gender'    => 'gênero',
         'hour'      => 'hora',
         'last_name' => 'sobrenome',
         'message'   => 'mensagem',
         'minute'    => 'minuto',
         'mobile'    => 'celular',
+        'cellphone' => 'celular',
         'month'     => 'mês',
         'name'      => 'nome',
         'password'  => 'senha',
@@ -177,6 +178,7 @@ return [
         'year'      => 'ano',
         'description' => 'descrição',
         'password_confirmation' => 'confirmação da senha',
+
     ],
 
 ];
