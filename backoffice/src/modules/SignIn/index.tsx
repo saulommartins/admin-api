@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from "react-hook-form";
-import { Container, Form, UserName, Password, SubmitButton } from './styles';
+import {
+  Container,
+  Form,
+  UserName,
+  Password,
+  SubmitButton,
+  SignInCard,
+  SignInFields,
+  SignInCardActions,
+  Notification
+} from './styles';
 
 import AuthService from '../../services/auth.service';
 import { useHistory } from 'react-router-dom';
@@ -48,56 +58,70 @@ const SignIn: React.FC<Props> = () => {
       <Form
         onSubmit={handleSubmit(handleSignUp)}
       >
-        <Controller
-          label="E-mail"
-          name="email"
-          as={UserName}
-          control={control}
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "invalid email address"
-            },
-          }}
-          variant="outlined"
-          defaultValue={""}
-        />
-        {errors.email && errors.email.type === "required" && (
-          <p>E-mail is required</p>
-        )}
-        <p>{errors.email && errors.email.message}</p>
+        <SignInCard>
+          <SignInFields>
+            <Controller
+              label="E-mail"
+              name="email"
+              as={UserName}
+              control={control}
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                  message: "invalid email address"
+                },
+              }}
+              // variant="outlined"
+              defaultValue={""}
+            />
+            {errors.email && errors.email.type === "required" && (
+              <Notification>
+                <span>E-mail is required</span>
+              </Notification>
+            )}
+            <p>{errors.email && errors.email.message}</p>
 
 
-        <Controller
-          label="Password"
-          type="password"
-          name="password"
-          as={Password}
-          control={control}
-          rules={{
-            required: true,
-          }}
-          variant="outlined"
-          defaultValue={""}
-        />
-        {errors.password && errors.password.type === "required" && (
-          <p>Password is required</p>
-        )}
+            <Controller
+              label="Password"
+              type="password"
+              name="password"
+              as={Password}
+              control={control}
+              rules={{
+                required: true,
+              }}
+              // variant="outlined"
+              defaultValue={""}
+            />
+            {errors.password && errors.password.type === "required" && (
+              <Notification>
+                <span>Password is required</span>
+              </Notification>
+            )}
+            <SignInCardActions>
+              <SubmitButton
+                variant="contained"
+                type="submit"
+                color="primary"
+                // disabled={loading}
+                fullWidth
+              >
+                <span>Sign In</span>
+              </SubmitButton>
+            </SignInCardActions>
 
-        <div className="form-group">
-          <SubmitButton>
-            <span>Sign In</span>
-          </SubmitButton>
-        </div>
-
-        {message && (
-          <div className="form-group">
-            <div className="alert alert-danger" role="alert">
-              {message}
-            </div>
-          </div>
-        )}
+            {message && (
+              <Notification>
+                <span>
+                  {message}
+                </span>
+              </Notification>
+            )}
+          </SignInFields>
+        </SignInCard>
+        {/* <Notification /> */}
       </Form>
     </Container>
   );
